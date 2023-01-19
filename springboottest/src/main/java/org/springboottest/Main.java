@@ -7,26 +7,32 @@ import java.util.List;
 public class Main {
     private static final int TICKET_COUNT = 100;
     public static void main(String[] args) {
-        ArrayList<Integer> total = new ArrayList<Integer>();
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        List<ArrayList<Integer>> ticket = new ArrayList<>();
-        total = generateTotalNumbers(total);
-        result = generateResultNumbers(total, result);
+        // set ticket
+        List<ArrayList<Integer>> tickets = new ArrayList<>();
+        // set 45 Total Number
+        ArrayList<Integer> total = generateTotalNumbers();
+        // set winning result Number
+        ArrayList<Integer> result = generateResultNumbers(total);
+        // print result
         printResultNumbers(result);
-        ticket = buyTicket(total, ticket);
-        for(ArrayList<Integer> list: ticket) {
+        // ticket buy
+        buyTicket(total, tickets);
+        // result
+        for(ArrayList<Integer> list: tickets) {
             matchNumbers(list, result);
         }
     }
 
-    private static ArrayList<Integer> generateTotalNumbers(ArrayList<Integer> total) {
+    private static ArrayList<Integer> generateTotalNumbers() {
+        ArrayList<Integer> total = new ArrayList<Integer>();
         for (int i = 0; i < 45; i++) {
             total.add(i + 1);
         }
         return total;
     }
 
-    private static ArrayList<Integer> generateResultNumbers(ArrayList<Integer> total, ArrayList<Integer> result) {
+    private static ArrayList<Integer> generateResultNumbers(ArrayList<Integer> total) {
+        ArrayList<Integer> result = new ArrayList<Integer>();
         Collections.shuffle(total);
         result.addAll(total.subList(0,7));
         Collections.sort(result);
@@ -72,6 +78,10 @@ public class Main {
                 }
             }
         }
+        printResultLotto(matchPoint);
+    }
+
+    private static void printResultLotto(int matchPoint) {
         switch (matchPoint) {
             case 3:
                 System.out.println("Winning : 5 rank ");
